@@ -9,15 +9,10 @@ class Address extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $fillable = [ 
-    
-        'cep',
-        'state',
-        'city',
-        'neighborhood',
-        'street',
-       'number',
-        'complement'];
+    protected $fillable = [
+
+        'cep','state', 'city','neighborhood',
+        'street','number','complement'];
 
     public function workshop()
     {

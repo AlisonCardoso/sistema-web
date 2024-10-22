@@ -13,17 +13,15 @@ return new class extends Migration
     {
         Schema::create('service_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('budget_id')->constrained()->onDelete('cascade'); 
-            $table->foreignId('vehicle_id')->constrained()->onDelete('cascade');
-            $table->foreignId('workshop_id')->constrained()->onDelete('cascade');
-            $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->date('service_date');
-            $table->foreignId('product_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('status')->default('open'); // Status: open, in_progress, completed
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
-
-
+            $table->foreignId('budget_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('workshop_id')->constrained()->cascadeOnDelete(); // Oficina associada
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
+            $table->date('service_date'); // Data do serviço
+            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete(); // Produto opcional
+            $table->string('status')->default('open'); // Ex: open, in_progress, completed
+            $table->timestamp('start_date')->nullable(); // Data de início
+            $table->timestamp('end_date')->nullable(); // Data de término
             $table->timestamps();
         });
     }

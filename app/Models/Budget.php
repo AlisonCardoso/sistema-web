@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Budget extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = ['vehicle_id', 'service_id', 'total_amount', 'status'];
+
+    // Relacionamento com Vehicle (Muitos para Um)
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    // Relacionamento com Service (Muitos para Um)
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    // Relacionamento com ServiceOrder (Um Orçamento pode ter várias Ordens de Serviço)
+    public function serviceOrders()
+    {
+        return $this->hasMany(ServiceOrder::class);
+    }
 }

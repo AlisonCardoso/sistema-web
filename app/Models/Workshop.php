@@ -9,8 +9,7 @@ class Workshop extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'address_id',
-        'cnpj',
+       'address_id','cnpj',
         'razao_social',
         'descricao_situacao_cadastral',
         'cnae_fiscal_descricao',
@@ -31,6 +30,6 @@ class Workshop extends Model
     {
         return $this->hasMany(Service_order::class);
     }
-   
-    
+
+
 }

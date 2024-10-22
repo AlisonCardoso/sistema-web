@@ -13,6 +13,7 @@ class Product extends Model
       {
         return $this->belongsTo(Subcategory::class);
     }
+    // Relacionamento com ServiceOrder (Um Produto pode estar em várias Ordens de Serviço)
     public function serviceOrders()
     {
         return $this->hasMany(Service_order::class);

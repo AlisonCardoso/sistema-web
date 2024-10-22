@@ -21,23 +21,33 @@ class Service_order extends Model
         'end_date',
     ];
 
-    public function service()
+    // Relacionamento com Budget (Muitos para Um)
+    public function budget()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Budget::class);
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
+    // Relacionamento com Vehicle (Muitos para Um)
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
     }
 
+    // Relacionamento com Workshop (Muitos para Um)
     public function workshop()
     {
         return $this->belongsTo(Workshop::class);
+    }
+
+    // Relacionamento com Service (Muitos para Um)
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    // Relacionamento com Product (Muitos para Um)
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->withDefault(); // Produto opcional
     }
 }

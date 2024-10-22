@@ -15,17 +15,17 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sub_command_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('type_vehicle_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('situation_vehicle_id')->default(1);
-            $table->string('brand'); //marca
-            $table->string('model');//modelo
-            $table->string('prefix')->unique();//prefixo
-            $table->boolean('characterized')->default(true);// caracterizada
-            $table->string('asset_number')->unique()->nullable(); //numero de patrimonio
-            $table->string('odometer')->nullable();
-            $table->boolean('active')->default(true);
-            $table->string('plate')->unique(); //placa
-            $table->year('year'); //ano
-            $table->decimal('price', 8, 2);  //preco
+            $table->foreignId('situation_vehicle_id')->default(1)->constrained()->cascadeOnUpdate(); // Garantir integridade
+            $table->string('brand'); // Marca
+            $table->string('model'); // Modelo
+            $table->string('prefix')->unique(); // Prefixo único
+            $table->boolean('characterized')->default(true); // Veículo caracterizado
+            $table->string('asset_number')->unique()->nullable(); // Número de patrimônio (opcional)
+            $table->string('odometer')->nullable(); // Hodômetro
+            $table->boolean('active')->default(true); // Veículo ativo
+            $table->string('plate')->unique(); // Placa única
+            $table->year('year'); // Ano de fabricação
+            $table->decimal('price', 8, 2); // Preço
             $table->timestamps();
         });
     }

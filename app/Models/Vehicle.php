@@ -9,49 +9,41 @@ class Vehicle extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = [
-        
-        'sub_command_id',
-        'type_vehicle_id',
-        'vehicle_id',
-        'situation_vehicle_id',
-         'brand',
-         'model',
-        'prefix',
-        'plate',
-         'asset_number',
-        'characterized',
-        'active',
-         'year',
-        'odometer',
-         'price'
+        'situation_vehicle_id', 'brand',
+        'model', 'prefix', 'characterized', 'asset_number', 'odometer',
+        'active', 'plate', 'year', 'price'
+    ];
 
-         
-
-     ];
-
-     public function type_vehicle()
-     {
-
-         return $this->hasOne(TypeVehicle::class);
-     }
-     public function sub_command()
+    // Relacionamento com SubCommand (Muitos para Um)
+    public function subCommand()
     {
         return $this->belongsTo(SubCommand::class);
     }
 
+    // Relacionamento com TypeVehicle (Muitos para Um)
+    public function typeVehicle()
+    {
+        return $this->belongsTo(TypeVehicle::class);
+    }
+
+    // Relacionamento com SituationVehicle (Muitos para Um)
     public function situationVehicle()
     {
         return $this->belongsTo(SituationVehicle::class);
     }
+
+    // Relacionamento com Budget (Um Veículo pode ter vários Orçamentos)
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+
+    // Relacionamento com ServiceOrder (Um Veículo pode ter várias Ordens de Serviço)
     public function serviceOrders()
     {
-        return $this->hasMany(Service_order::class);
-    }
-    
- 
-    public function services()
-    {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(ServiceOrder::class);
     }
 }

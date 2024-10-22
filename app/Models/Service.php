@@ -16,13 +16,24 @@ class Service extends Model
         'price',
         'duration',
     ];
-    public function subcategory()
+
+
+    // Relacionamento com SubCategory (Muitos para Um)
+    public function subCategory()
     {
-        return $this->belongsTo(Subcategory::class,'sub_category_id');
+        return $this->belongsTo(SubCategory::class);
     }
 
+    // Relacionamento com Budget (Um Serviço pode estar em vários Orçamentos)
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+
+    // Relacionamento com ServiceOrder (Um Serviço pode estar em várias Ordens de Serviço)
     public function serviceOrders()
     {
-        return $this->hasMany(Service_order::class);
+        return $this->hasMany(ServiceOrder::class);
     }
+
 }

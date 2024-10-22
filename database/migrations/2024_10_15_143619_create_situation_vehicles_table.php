@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('situation_vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique(); // Nome único para cada situação
             $table->string('color');
             $table->timestamps();
         });
