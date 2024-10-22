@@ -4,9 +4,9 @@ import laravel, { refreshPaths } from "laravel-vite-plugin";
 export default defineConfig({
     server: {
         hmr: {
-            host: 'viteteste'
+            host: 'sistema'
         },
-        host: 'viteteste'
+        host: 'sistema'
     },
     plugins: [
         laravel({
