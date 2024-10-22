@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('workshops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('address_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+           // $table->foreignId('address_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('cnpj')->unique();
             $table->string('razao_social');
-            $table->string('nome_fantasia');
             $table->string('descricao_situacao_cadastral');
-            $table->string('cnae_fiscal_descricao');
+            $table->string('cnae_fiscal_descricao'); //nome_fantasia
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('responsavel')->nullable();

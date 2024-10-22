@@ -2,43 +2,42 @@
 
 @section('title', 'Cadastro de Oficina')
 
-@section('header-title', 'Bem-vindo ao Cadastro')
-@section('header-description', 'Preencha os campos abaixo para se cadastrar.')
+@section('header-title', isset($edit) ? 'Edição de Oficina' : 'Bem-vindo ao Cadastro')
+@section('header-description', isset($edit) ? 'Atualize os dados abaixo.' : 'Preencha os campos abaixo para se cadastrar.')
 
 @section('content')
 
-    <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12 mt-12"> <!-- Adicionei mt-12 para espaço acima -->
-        <div class="bg-gray-900 w-full shadow rounded p-8 sm:p-12">
-           
-            <form class="border-b-2 pb-10 mt-5" method="post" action="@if (isset($edit->id)){{ route('workshops.update', ['id' => $edit->id]) }}@else{{ route('workshops.store') }} @endif" enctype="multipart/form-data">
-                @csrf
+<div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12 mt-12">
+    <div class="bg-white dark:bg-gray-900 w-full shadow rounded p-8 sm:p-12">
+        <form method="POST" action="{{ isset($edit) ? route('workshops.update', ['id' => $edit->id]) : route('workshops.store') }}" enctype="multipart/form-data">
+            @csrf
+            @if(isset($edit)) @method('PUT') @endif
+ 
+ 
+            @livewire('buscar-cnpj')
 
-        @livewire('buscar-cnpj')
-                <div class="md:flex items-center mt-12">
+            {{--  aqui serao inseridos os inputs do livewire--}}
 
-                    <div class="w-full md:w-1/2 flex flex-col">
-                        <label class="font-semibold leading-none text-gray-300">Nome do responsavel</label>
-                        <input type="text" class="leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded" name="name" />
-                    </div>
-                    <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
-                        <label class="font-semibold leading-none text-gray-300">Telefone</label>
-                        <input type="text" class="leading-none text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-800 rounded" name="phone_number" />
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                <label for="number" class="block text-gray-800 dark:text-gray-300">Número</label>
+                <input type="text" id="number" name="number" class="w-full px-3 py-2 border rounded-md bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring focus:ring-blue-500" value="{{ old('number', $edit->address->number ?? '') }}" required>
+                @error('number') <span class="text-red-500">{{ $message }}</span> @enderror
+            </div>
 
-                </div>
-            
-            @livewire('buscar-cep')
+            <div >
+                <label for="complement" class="block text-gray-800 dark:text-gray-300">Complemento</label>
+                <input type="text" id="complement" name="complement" class="w-full px-3 py-2 border rounded-md bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring focus:ring-blue-500" value="{{ old('complement', $edit->address->complement ?? '') }}">
+                @error('complement') <span class="text-red-500">{{ $message }}</span> @enderror
+            </div>
+            </div>
 
-                
-
-                <div class="mt-6">
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Cadastrar
-                    </button>
-                </div>
-
-            </form>
-        </div>
+            <div class="mt-6 flex justify-end">
+                <a href="{{ route('workshops.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-md">Cancelar</a>
+                <button type="submit" class="ml-3 px-4 py-2 bg-blue-600 text-white rounded-md">{{ isset($edit) ? 'Atualizar' : 'Cadastrar' }}</button>
+            </div>
+        </form>
     </div>
+</div>
 
 @endsection

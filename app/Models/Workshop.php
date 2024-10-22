@@ -12,7 +12,6 @@ class Workshop extends Model
        'address_id',
         'cnpj',
         'razao_social',
-        'nome_fantasia',
         'descricao_situacao_cadastral',
         'cnae_fiscal_descricao',
         'phone_number',
@@ -27,6 +26,10 @@ class Workshop extends Model
     public function address()
     {
         return $this->hasOne(Address::class);
+    }
+    public function serviceOrders()
+    {
+        return $this->hasMany(Service_order::class);
     }
    
     

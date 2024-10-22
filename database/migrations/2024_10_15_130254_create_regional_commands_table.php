@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('regional_commands', function (Blueprint $table) {
             $table->id();
-            $table->string('cep');
-            $table->string('state');
-            $table->string('city');
-            $table->string('neighborhood');
-            $table->string('street');
-            $table->integer('number')->nullable();
-            $table->string('complement')->nullable();
+            $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('regional_commands');
     }
 };
