@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
            SeederCompanies::class,
            SeederCategoria::class,
            seederSubcategoria::class,
+           SeederSituation::class,
 
  /*
            Seedertipoveiculo::class,

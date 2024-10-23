@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('labors', function (Blueprint $table) {
+        Schema::create('situations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sub_category_id')->constrained()->onDelete('cascade');
-            $table->foreignId('service_order_id')->constrained()->onDelete('cascade');
-            $table->decimal('hours_worked', 10, 2);
-            $table->decimal('hourly_rate', 10, 2);
+            $table->string('name'); // Ex: 'pending', 'approved', 'rejected'
+            $table->string('description')->nullable(); // Descrição opcional da situação        
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('labors');
+        Schema::dropIfExists('situations');
     }
 };

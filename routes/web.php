@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BudgetController;
 
 
 
@@ -36,3 +37,4 @@ Route::get('/labor-component', LaborComponent::class)->name('labor-component');
     Route::resources(['companies'=> CompanyController::class]);
 
     Route::resource('services', ServiceController::class);
+    Route::resource('budgets', BudgetController::class);

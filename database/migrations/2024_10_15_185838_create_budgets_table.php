@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('service_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->decimal('total_amount', 10, 2); // Valor total
-            $table->string('status')->default('pending'); // Ex: pending, approved, rejected
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('situation_id')->constrained('situations')->cascadeOnUpdate(); // Nova situação
+            $table->decimal('total_amount', 10, 2);
             $table->timestamps();
         });
     }
