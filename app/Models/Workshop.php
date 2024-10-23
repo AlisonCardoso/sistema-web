@@ -28,7 +28,7 @@ class Workshop extends Model
     }
     public function serviceOrders()
     {
-        return $this->hasMany(Service_order::class);
+        return $this->hasMany(ServiceOrder::class);
     }
 
 

@@ -16,6 +16,6 @@ class Product extends Model
     // Relacionamento com ServiceOrder (Um Produto pode estar em várias Ordens de Serviço)
     public function serviceOrders()
     {
-        return $this->hasMany(Service_order::class);
+        return $this->hasMany(ServiceOrder::class);
     }
 }

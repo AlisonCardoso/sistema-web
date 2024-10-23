@@ -1,36 +1,68 @@
 @extends('layout.master')
 
-@section('title', 'Lista de Oficina')
+@section('title', isset($service) ? 'Editar Serviço' : 'Novo Serviço')
 
-@section('header-title')
-@section('header-description')
+@section('header-title', 'Lista de Oficina')
+@section('header-description', isset($service) ? 'Editar Serviço' : 'Cadastrar Novo Serviço')
 
 @section('content')
-<h1 class="text-3xl text-white bg-blue-500 font-bold underline">
-    Hello world!
-</h1>
-<h2 class="text-white bg-amber-300"> teste vite
-</h2>
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">{{ isset($service) ? 'Editar Serviço' : 'Novo Serviço' }}</h1>
 
+        <form action="{{ isset($service) ? route('services.update', $service) : route('services.store') }}" method="POST">
+            @csrf
+            @if (isset($service))
+                @method('PUT')
+            @endif
 
-<form action="{{ route('services.store') }}" method="POST" class="mt-4">
-    @csrf
-    <div>
-        <label class="block">Nome:</label>
-        <input type="text" name="name" class="border rounded w-full p-2" required>
+            <div class="mb-4">
+                <label for="name" class="block mb-2">Nome</label>
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value="{{ old('name', $service->name ?? '') }}"
+                    class="w-full p-2 border rounded"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label for="price" class="block mb-2">Preço</label>
+                <input
+                    type="number"
+                    step="0.01"
+                    name="price"
+                    id="price"
+                    value="{{ old('price', $service->price ?? '') }}"
+                    class="w-full p-2 border rounded"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label for="duration" class="block mb-2">Duração (em horas)</label>
+                <input
+                    type="number"
+                    name="duration"
+                    id="duration"
+                    value="{{ old('duration', $service->duration ?? '') }}"
+                    class="w-full p-2 border rounded"
+                >
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="block mb-2">Descrição</label>
+                <textarea
+                    name="description"
+                    id="description"
+                    class="w-full p-2 border rounded"
+                >{{ old('description', $service->description ?? '') }}</textarea>
+            </div>
+
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+                {{ isset($service) ? 'Atualizar' : 'Salvar' }}
+            </button>
+        </form>
     </div>
-
-    <div class="mt-4">
-        <label class="block">Preço:</label>
-        <input type="number" name="price" class="border rounded w-full p-2" step="0.01" required>
-    </div>
-
-    <div class="mt-4">
-        <label class="block">Descrição:</label>
-        <textarea name="description" class="border rounded w-full p-2"></textarea>
-    </div>
-
-    <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Salvar</button>
-</form>
-</div>
 @endsection
