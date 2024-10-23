@@ -46,8 +46,12 @@ class BudgetController extends Controller
 
     public function edit(Budget $budget)
     {
-        return view('budgets.edit', compact('budget'));
-    }
+    $vehicles = Vehicle::all();
+    $services = Service::all();
+    $situations = Situation::all();
+
+    return view('budgets.crate', compact('budget', 'vehicles', 'services', 'situations'));
+}
 
     public function update(Request $request, Budget $budget)
     {
