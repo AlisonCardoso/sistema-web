@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
+
+            $table->decimal('total_labor', 10, 2);  // Total da mão de obra
+            $table->decimal('total_products', 10, 2);  // Total dos produtos
+            $table->decimal('total_amount', 10, 2)->virtualAs('total_labor + total_products');  // Valor final
             $table->foreignId('situation_id')->constrained('situations')->cascadeOnUpdate(); // Nova situação
-            $table->decimal('total_amount', 10, 2);
             $table->timestamps();
         });
     }

@@ -8,6 +8,9 @@ use App\Models\SubCommand;
 use App\Models\Company;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\TypeVehicle;
+use App\Models\Vehicle;
+use App\Models\SituationVehicle;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,29 +30,34 @@ class DatabaseSeeder extends Seeder
         ]);*/
 
         $this->call([
-           
-          
-           SeederComandoRegional::class,
-           SeederBatalhao::class,
-           SeederCompanies::class,
-           SeederCategoria::class,
-           seederSubcategoria::class,
-           SeederSituation::class,
+
+
+
+            SeederComandoRegional::class,
+            SeederBatalhao::class,
+            SeederCompanies::class,
+            SeederCategoria::class,
+            seederSubcategoria::class,
+            SeederSituation::class,
+
+            SeederProduct::class,
+            SeederService::class,
+            SeederSituacaoVeiculo::class,
+            Seedertipoveiculo::class,
+
+          // SeederServiceOrder::class,
+            //SeederVehicle::class,
+
 
  /*
-           Seedertipoveiculo::class,
-           SeederSituacaoVeiculo::class,
+       // SeederBudget::class,
+
 */
 
 
 
-          //  SeederType_vehicle::class,
-         // SituacaoContaSeeder::class,
-           // ContaSeeder::class,
-         // TipoContaSeeder::class,
-             // SituationVehiclesSeeder::class,
-             
-            
+
+
         ]);
 
     }

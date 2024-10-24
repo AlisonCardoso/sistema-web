@@ -10,7 +10,18 @@ class Budget extends Model
     use HasFactory;
 
 
-    protected $fillable = ['vehicle_id', 'service_id', 'total_amount', 'status'];
+    protected $fillable = [
+        'vehicle_id',
+        'total_labor',
+        'total_products',
+
+        'situation_id'];
+
+
+
+
+
+
 
     // Relacionamento com Vehicle (Muitos para Um)
     public function vehicle()

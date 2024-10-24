@@ -13,17 +13,16 @@ return new class extends Migration
     {
         Schema::create('service_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('budget_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('workshop_id')->constrained()->cascadeOnDelete(); // Oficina associada
-            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('situation_id')->constrained('situations')->cascadeOnUpdate(); // Situação da ordem de serviço
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('workshop_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('situation_id')->constrained('situations')->cascadeOnUpdate();
             $table->date('service_date');
-            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete(); 
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
+            $table->decimal('labor_hourly_rate', 10, 2)->nullable();  // Valor por hora da mão de obra
+            $table->integer('labor_hours')->nullable();  // Duração total da mão de obra em horas
+            $table->decimal('labor_total', 10, 2)->virtualAs('labor_hourly_rate * labor_hours')->nullable(); // Valor total calculado
             $table->timestamps();
         });
-        
+
     }
 
     /**

@@ -10,22 +10,16 @@ class ServiceOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'budget_id',
         'vehicle_id',
         'workshop_id',
-        'service_id',
-        'product_id',
+        'situation_id',
         'service_date',
-        'status',
-        'start_date',
-        'end_date',
+        'labor_hourly_rate',
+        'labor_hours',
+
     ];
 
-    // Relacionamento com Budget (Muitos para Um)
-    public function budget()
-    {
-        return $this->belongsTo(Budget::class);
-    }
+
 
     // Relacionamento com Vehicle (Muitos para Um)
     public function vehicle()
@@ -39,15 +33,9 @@ class ServiceOrder extends Model
         return $this->belongsTo(Workshop::class);
     }
 
-    // Relacionamento com Service (Muitos para Um)
-    public function service()
+    // Relacionamento com Situation
+    public function situation()
     {
-        return $this->belongsTo(Service::class);
-    }
-
-    // Relacionamento com Product (Muitos para Um)
-    public function product()
-    {
-        return $this->belongsTo(Product::class)->withDefault(); // Produto opcional
+        return $this->belongsTo(Situation::class);
     }
 }
